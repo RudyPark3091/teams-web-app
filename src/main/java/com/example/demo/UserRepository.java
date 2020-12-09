@@ -18,7 +18,15 @@ public class UserRepository {
         userMap.put("user2", new User("user2", "TG"));
         userMap.put("user3", new User("user3", "AA"));
     }
+
     public User findById(String id) {
         return userMap.get(id);
+    }
+
+    public User save(User user) {
+        String name = "user";
+        name += Integer.toString(userMap.values().size() + 1);
+        userMap.put(name, user);
+        return user;
     }
 }

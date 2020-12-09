@@ -4,9 +4,23 @@ schema {
 
 type Query {
   user(id:String): User!
+  person(id:String): Person
+  people: [Person]!
+}
+
+type Mutation {
+  createUser(id:String!, name:String!): User!
+  createPerson(id:String!, name:String!, alias:String!, age:Int!): Person!
 }
 
 type User {
   id: String!
   name: String!
+}
+
+type Person {
+  id: String!
+  name: String!
+  alias: String!
+  age: Int!
 }
