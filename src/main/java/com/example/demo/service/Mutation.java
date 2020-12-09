@@ -1,6 +1,10 @@
-package com.example.demo;
+package com.example.demo.service;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
+import com.example.demo.domain.Person;
+import com.example.demo.domain.PersonRepository;
+import com.example.demo.domain.User;
+import com.example.demo.domain.UserRepository;
 import org.springframework.stereotype.Component;
 
 @Component
