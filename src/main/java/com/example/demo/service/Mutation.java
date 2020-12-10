@@ -5,17 +5,15 @@ import com.example.demo.domain.Person;
 import com.example.demo.domain.PersonRepository;
 import com.example.demo.domain.User;
 import com.example.demo.domain.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Mutation implements GraphQLMutationResolver {
+    @Autowired
     private UserRepository userRepository;
+    @Autowired
     private PersonRepository personRepository;
-
-    public Mutation(UserRepository userRepository, PersonRepository personRepository) {
-        this.userRepository = userRepository;
-        this.personRepository = personRepository;
-    }
 
     public User createUser(String id, String name) {
         User user = new User(id, name);
