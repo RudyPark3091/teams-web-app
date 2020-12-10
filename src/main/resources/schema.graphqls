@@ -1,26 +1,36 @@
 schema {
     query: Query
 }
-
 type Query {
-  user(id:String): User!
-  person(id:String): Person
-  people: [Person]!
+  getTodoById(id:String!): Todo
 }
 
-type Mutation {
-  createUser(id:String!, name:String!): User!
-  createPerson(id:String!, name:String!, alias:String!, age:Int!): Person!
+type Todo {
+  id: String!
+  startDate: Date!
+  endDate: Date!
+  content: String!
+  isAssignedForTeam: Boolean!
+  assigned: User!
 }
 
 type User {
   id: String!
   name: String!
+  color: String!
 }
 
-type Person {
-  id: String!
-  name: String!
-  alias: String!
-  age: Int!
+type Date {
+  year: Int!
+  month: Int!
+  date: Int!
+  day: Int!
+  time: Time!
+}
+
+type Time {
+  hour: Int!
+  minute: Int!
+  isAm: Boolean!
+  isFormat24: Boolean!
 }
