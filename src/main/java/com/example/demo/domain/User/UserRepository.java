@@ -1,6 +1,6 @@
-package com.example.demo.domain;
+package com.example.demo.domain.User;
 
-import com.example.demo.domain.User;
+import com.example.demo.domain.User.User;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
@@ -14,9 +14,9 @@ public class UserRepository {
 
     @PostConstruct
     private void loadSchema() {
-        userMap.put("user1", new User("user1", "HM"));
-        userMap.put("user2", new User("user2", "TG"));
-        userMap.put("user3", new User("user3", "AA"));
+        userMap.put("user1", new User("user1", "HM", "#ff0000"));
+        userMap.put("user2", new User("user2", "TG", "#00ff00"));
+        userMap.put("user3", new User("user3", "AA", "#0000ff"));
     }
 
     public User findById(String id) {
