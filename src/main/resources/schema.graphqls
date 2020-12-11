@@ -2,6 +2,7 @@ schema {
     query: Query
 }
 type Query {
+  todos: [Todo]!
   getTodoById(id:String!): Todo
 }
 
@@ -11,7 +12,7 @@ type Todo {
   endDate: Date!
   content: String!
   isAssignedForTeam: Boolean!
-  assigned: User!
+  assigned: [User]!
 }
 
 type User {
