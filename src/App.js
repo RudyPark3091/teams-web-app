@@ -3,8 +3,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import useTabs from './hooks/useTabs.js';
+
 import LeftArea from './components/LeftArea.js';
 import RightArea from './components/RightArea.js';
+import Calendar from './components/Calendar.js';
+import MainPage from './components/MainPage.js';
 
 const Container = styled.div`
 	width: 100%;
@@ -12,11 +16,28 @@ const Container = styled.div`
 	display: flex;
 `;
 
+const tabs = [
+	{
+		context: "Main",
+		body: <MainPage></MainPage>
+	},
+	{
+		context: "Calendar",
+		body: <Calendar></Calendar>
+	}
+]
+
 function App(props) {
+	const { currentItem, changeItem } = useTabs(0, tabs);
+
   return (
 		<Container>
 			<LeftArea width={props.width}></LeftArea>
-			<RightArea width={props.width} header="50px"></RightArea>
+				<RightArea
+					body={currentItem.body}
+					width={props.width}
+					header="50px"
+				></RightArea>
 		</Container>
   );
 }

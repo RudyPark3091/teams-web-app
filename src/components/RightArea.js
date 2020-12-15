@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import useTabs from '../hooks/useTabs.js';
+
 import Calendar from './Calendar.js';
 
 const Container = styled.div`
@@ -33,7 +35,7 @@ const RightArea = (props) => {
 	return (
 		<Container width={props.width}>
 			<Header header={HEADER_HEIGHT}>Header</Header>
-			<Calendar></Calendar>
+			{props.body}
 		</Container>
 	);
 }
