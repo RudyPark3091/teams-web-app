@@ -9,10 +9,6 @@ background-color: tomato;
 position: fixed;
 left: 0px;
 
-&:hover {
-	background-color: coral;
-}
-
 @media screen and (max-width: 1000px) {
 	& {
 		display: none;
@@ -20,12 +16,33 @@ left: 0px;
 }
 `;
 
+const Wrapper = styled.div`
+width: 100%;
+background-color: #f87190;
+`;
+
+const Item = styled.div`
+width: calc(100% - 10px * 2);
+height: 50px;
+background-color: #fe5890;
+margin: 10px;
+display: flex;
+align-items: center;
+
+&:hover {
+	background-color: #ff68a1;
+	cursor: pointer;
+}
+`;
+
 const LeftArea = (props) => {
 	return (
 		<Container width={props.width} header={props.header}>
-			LeftArea
+			{props.children}
 		</Container>
 	)
 }
 
 export default LeftArea;
+export { Wrapper, Item };
+

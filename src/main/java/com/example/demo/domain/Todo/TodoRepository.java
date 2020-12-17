@@ -20,8 +20,8 @@ public class TodoRepository {
     @PostConstruct
     public void loadSchema() {
         Time time = new Time(10, 0, false, false);
-        Date startDate = new Date(2020, 12, 10, 2, time);
-        Date endDate = new Date(2020, 12, 10, 3, time);
+        Date startDate = new Date(2020, 10, 12, 2, time);
+        Date endDate = new Date(2020, 11, 13, 3, time);
         User user = new User("user1", "HM", "#ff0000");
         User user2 = new User("user2", "TG", "#00ff00");
         String id = "asdfasdf";
@@ -29,13 +29,13 @@ public class TodoRepository {
 
         Time time2 = new Time(10, 0, false, false);
         Date startDate2 = new Date(2020, 12, 10, 2, time);
-        Date endDate2 = new Date(2020, 12, 10, 3, time);
+        Date endDate2 = new Date(2020, 12, 17, 3, time);
         String id2 = "aldkfj";
         todoMap.put(id2, new Todo(id2, startDate2, endDate2, "Content", false, Arrays.asList(user, user2)));
 
         Time time3 = new Time(10, 0, false, false);
-        Date startDate3 = new Date(2020, 12, 10, 2, time);
-        Date endDate3 = new Date(2020, 12, 10, 3, time);
+        Date startDate3 = new Date(2019, 9, 12, 2, time);
+        Date endDate3 = new Date(2020, 12, 13, 3, time);
         String id3 = "qpeidj";
         todoMap.put(id3, new Todo(id3, startDate3, endDate3, "Content", false, Arrays.asList(user, user2)));
     }

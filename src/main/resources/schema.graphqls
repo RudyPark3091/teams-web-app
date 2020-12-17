@@ -1,6 +1,7 @@
 schema {
     query: Query
 }
+
 type Query {
   todos: [Todo]!
   getTodoById(id:String!): Todo

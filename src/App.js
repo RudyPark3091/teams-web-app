@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import useTabs from './hooks/useTabs.js';
 
 import Header from './components/Header.js';
-import LeftArea from './components/LeftArea.js';
+import LeftArea, { Wrapper, Item } from './components/LeftArea.js';
 import RightArea from './components/RightArea.js';
 import Calendar from './components/Calendar.js';
 import MainPage from './components/MainPage.js';
@@ -37,10 +37,16 @@ function App(props) {
 			<LeftArea
 				width={props.width}
 				header="50px"
-			></LeftArea>
+			>
+				<Wrapper>
+					{tabs.map((tab, i) => (
+						<Item key={i} onClick={() => changeItem(i)}>{tab.context}</Item>
+					))}
+				</Wrapper>
+			</LeftArea>
 			<RightArea
-				header="50px"
 				width={props.width}
+				header="50px"
 			>
 					{currentItem.body}
 			</RightArea>
