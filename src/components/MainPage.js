@@ -76,7 +76,6 @@ const MainPage = (props) => {
 			</Modal>
 		</>
 	);
-	console.log(data);
 
 	return (
 		<>
@@ -86,7 +85,7 @@ const MainPage = (props) => {
 			<Container>
 				<Title>Schedules</Title>
 				{data.todos.map((todo, i) => (
-					<Wrapper>
+					<Wrapper key={i}>
 						<div style={{fontSize:"20px"}}>{todo.content}</div>
 						<Vertical>
 							<span>{`${todo.startDate.year}-${todo.startDate.month}-${todo.startDate.date}`}</span>

@@ -10,6 +10,7 @@ import LeftArea, { Wrapper, Item } from './components/LeftArea.js';
 import RightArea from './components/RightArea.js';
 import Calendar from './components/Calendar.js';
 import MainPage from './components/MainPage.js';
+import UserList from './components/UserList.js';
 
 const Container = styled.div`
 	width: 100%;
@@ -25,6 +26,10 @@ const tabs = [
 	{
 		context: "Calendar",
 		body: <Calendar></Calendar>
+	},
+	{
+		context: "UserList",
+		body: <UserList></UserList>
 	}
 ]
 
