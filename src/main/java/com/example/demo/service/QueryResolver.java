@@ -2,7 +2,9 @@ package com.example.demo.service;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.example.demo.domain.Todo.Todo;
+import com.example.demo.domain.User.User;
 import com.example.demo.domain.Todo.TodoRepository;
+import com.example.demo.domain.User.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,12 +14,18 @@ import java.util.List;
 public class QueryResolver implements GraphQLQueryResolver {
     @Autowired
     private TodoRepository todoRepository;
+		@Autowired
+		private UserRepository userRepository;
 
     public List<Todo> todos() {
-        return todoRepository.findAll();
+			return todoRepository.findAll();
     }
 
     public Todo getTodoById(String id) {
-        return todoRepository.findById(id);
+			return todoRepository.findById(id);
     }
+
+		public List<User> users() {
+			return userRepository.findAll();
+		}
 }

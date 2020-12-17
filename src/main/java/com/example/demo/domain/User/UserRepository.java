@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
 import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
@@ -29,4 +31,8 @@ public class UserRepository {
         userMap.put(name, user);
         return user;
     }
+
+		public List<User> findAll() {
+			return new ArrayList<User>(userMap.values());
+		}
 }

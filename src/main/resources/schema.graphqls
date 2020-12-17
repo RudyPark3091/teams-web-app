@@ -5,6 +5,7 @@ schema {
 type Query {
   todos: [Todo]!
   getTodoById(id:String!): Todo
+	users: [User]!
 }
 
 type Todo {
