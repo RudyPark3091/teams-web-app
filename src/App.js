@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import useTabs from './hooks/useTabs.js';
 
+import Header from './components/Header.js';
 import LeftArea from './components/LeftArea.js';
 import RightArea from './components/RightArea.js';
 import Calendar from './components/Calendar.js';
@@ -32,12 +33,17 @@ function App(props) {
 
   return (
 		<Container>
-			<LeftArea width={props.width}></LeftArea>
-				<RightArea
-					body={currentItem.body}
-					width={props.width}
-					header="50px"
-				></RightArea>
+			<Header header="50px"></Header>
+			<LeftArea
+				width={props.width}
+				header="50px"
+			></LeftArea>
+			<RightArea
+				header="50px"
+				width={props.width}
+			>
+					{currentItem.body}
+			</RightArea>
 		</Container>
   );
 }

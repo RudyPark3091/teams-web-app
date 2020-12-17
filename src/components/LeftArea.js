@@ -3,7 +3,8 @@ import styled from 'styled-components';
 
 const Container = styled.div`
 width: ${props => props.width ? props.width : "400px"};
-height: 100%;
+height: calc(100% - ${props => props.header ? props.header : "50px"});
+margin-top: ${props => props.header ? props.header : "50px"};
 background-color: tomato;
 position: fixed;
 left: 0px;
@@ -21,7 +22,7 @@ left: 0px;
 
 const LeftArea = (props) => {
 	return (
-		<Container width={props.width}>
+		<Container width={props.width} header={props.header}>
 			LeftArea
 		</Container>
 	)
