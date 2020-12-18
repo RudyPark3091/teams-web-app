@@ -12,10 +12,6 @@ margin-top: ${props => props.header ? props.header : "50px"};
 position: absolute;
 right: 0px;
 
-&:hover {
-	background-color: beige;
-}
-
 @media screen and (max-width: 1000px) {
 	& {
 		width: 100%;
