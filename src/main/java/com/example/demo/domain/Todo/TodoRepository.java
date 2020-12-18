@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 @Repository
 public class TodoRepository {
@@ -46,5 +47,13 @@ public class TodoRepository {
 
     public Todo findById(String id) {
         return todoMap.get(id);
+    }
+
+    public List<Todo> findByUser(User user) {
+        return todoMap
+                .values()
+                .stream()
+                .filter(todo -> todo.getAssigned().contains(user))
+                .collect(Collectors.toList());
     }
 }

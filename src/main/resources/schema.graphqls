@@ -6,6 +6,7 @@ type Query {
   todos: [Todo]!
   getTodoById(id:String!): Todo
 	users: [User]!
+	userAssignedTodo(userId:String): [Todo]
 }
 
 type Todo {

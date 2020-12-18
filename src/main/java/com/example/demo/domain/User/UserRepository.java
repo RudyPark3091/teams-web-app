@@ -32,7 +32,7 @@ public class UserRepository {
         return user;
     }
 
-		public List<User> findAll() {
+    public List<User> findAll() {
 			return new ArrayList<User>(userMap.values());
 		}
 }

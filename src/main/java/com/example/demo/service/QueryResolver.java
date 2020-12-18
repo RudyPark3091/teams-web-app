@@ -18,14 +18,19 @@ public class QueryResolver implements GraphQLQueryResolver {
 		private UserRepository userRepository;
 
     public List<Todo> todos() {
-			return todoRepository.findAll();
+		return todoRepository.findAll();
     }
 
     public Todo getTodoById(String id) {
-			return todoRepository.findById(id);
+		return todoRepository.findById(id);
     }
 
-		public List<User> users() {
-			return userRepository.findAll();
-		}
+	public List<User> users() {
+		return userRepository.findAll();
+	}
+
+	public List<Todo> userAssignedTodo(String userId) {
+    	User user = userRepository.findById(userId);
+    	return todoRepository.findByUser(user);
+	}
 }
