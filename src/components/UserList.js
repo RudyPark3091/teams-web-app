@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { useQuery, gql } from '@apollo/client';
 
@@ -24,11 +24,13 @@ display: flex;
 const Wrapper = styled.div`
 width: 250px;
 height: 70px;
+margin: 10px 10px;
+background-color: #f8f8ff;
+border-radius: 10px;
 display: flex;
 justify-content: center;
 align-items: center;
 cursor: pointer;
-margin: 10px 0px;
 `;
 
 const Circle = styled.div`
@@ -46,24 +48,43 @@ font-weight: 500;
 
 const UserList = (props) => {
 	const { loading, error, data } = useQuery(QUERY_ALL_USERS);
+	const [userFocus, setUserFocus] = useState(0);
+
+	const user = useRef();
+
+	const handleClick = (e) => {
+		const id = e.target.dataset.uid;
+		if (id) setUserFocus(id);
+	};
+
+	useEffect(() => {
+		if (user.current) {
+			user.current.addEventListener("click", handleClick);
+		}
+		return () => {
+			if (user.current) {
+				user.current.removeEventListener("click", handleClick);
+			}
+		}
+	}, [loading]);
 
 	if (loading) return <Loading mono></Loading>;
 	if (error) return <p>Error :(</p>;
 
 	return (
 		<Container>
-			<div>
+			<div ref={user}>
 				{data.users.map((user, i) => (
-					<Wrapper key={i}>
-						<Circle color={user.color} size="40px"></Circle>
+					<Wrapper key={i} data-uid={user.id}>
+						<Circle color={user.color} size="40px" data-uid={user.id}></Circle>
 						<div>
-							<div>{`@${user.id}`}</div>
-							<Name>{user.name}</Name>
+							<div data-uid={user.id}>{`@${user.id}`}</div>
+							<Name data-uid={user.id}>{user.name}</Name>
 						</div>
 					</Wrapper>
 				))}
 			</div>
-			<UserTasks></UserTasks>
+			<UserTasks uid={userFocus}></UserTasks>
 		</Container>
 	);
 }
