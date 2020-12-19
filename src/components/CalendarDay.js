@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
+
+import Modal from './Modal.js';
 
 const Day = styled.div`
 color: ${props => (
@@ -18,14 +20,17 @@ padding: 10px;
 }
 `;
 
-const CalendarDay = (props) => {
-
+const CalendarDay = React.forwardRef((props, ref) => {
 	return (
 		<>
-			<Day sunday={props.sunday} saturday={props.saturday}>{props.text}</Day>
+			<Day
+				ref={ref}
+				sunday={props.sunday}
+				saturday={props.saturday}
+			>{props.text}</Day>
 		</>
 	)
-}
+});
 
 export default CalendarDay;
 

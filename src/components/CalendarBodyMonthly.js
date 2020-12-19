@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
+import Modal from './Modal.js';
 import useGesture from '../hooks/useGesture.js';
 import CalendarDay from './CalendarDay';
 
@@ -62,18 +63,50 @@ const CalendarBodyMonthly = (props) => {
 	const onDragUp = (e) => setDate(nextDate);
 
 	const ref = useGesture(onDragDown, onDragUp, 100);
+
+	const dayRef = useRef([]);
+	const modal = useRef();
+	for (let i = 0; i < 42; i++) {
+		dayRef.current = Array(42).fill().map((_, i) => (
+			dayRef.current[i] || React.createRef()
+		));
+	}
+	console.log(dayRef);
 	
+	const showModal = (e) => {
+		modal.current.style.display = "block";
+	}
+
+	useEffect(() => {
+		console.log(dayRef);
+		if (dayRef.current) {
+			dayRef.current.map((ref) => {
+				ref.current.addEventListener("click", showModal);
+			});
+		}
+		return () => {
+			if (dayRef.current) {
+				dayRef.current.map((ref) => {
+					ref.current.addEventListener("click", showModal);
+				});
+			}
+		};
+	});
+
 	const [numArr, setNumArr] = useState(arr);
 
 	return (
 		<Container { ...ref } headHeight={props.headHeight}>
+			<Modal ref={modal} width="400px" height="400px">
+				modal content
+			</Modal>
 			{arr.map((v, i) => {
 				if (i%7 === 6)
-					return <CalendarDay key={i} saturday text={v}></CalendarDay>
+					return <CalendarDay ref={dayRef.current[i]} key={i} saturday text={v}></CalendarDay>
 				else if (i%7 === 0)
-					return <CalendarDay key={i} sunday text={v}></CalendarDay>
+					return <CalendarDay ref={dayRef.current[i]} key={i} sunday text={v}></CalendarDay>
 				else
-					return <CalendarDay key={i} text={v}></CalendarDay>
+					return <CalendarDay ref={dayRef.current[i]} key={i} text={v}></CalendarDay>
 			})}
 		</Container>
 	);

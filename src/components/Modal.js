@@ -76,7 +76,7 @@ const Modal = React.forwardRef((props, ref) => {
 		return () => {
 			xButton.current.removeEventListener("click", closeModal);
 		}
-	}, []);
+	});
 
 	return ReactDOM.createPortal(
 		<Background ref={ref}>
