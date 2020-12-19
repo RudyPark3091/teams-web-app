@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import useTabs from '../hooks/useTabs.js';
 import useGesture from '../hooks/useGesture.js';
 
+import CalendarHeader from './CalendarHeader.js';
 import CalendarBodyMonthly, { lastDate } from './CalendarBodyMonthly.js';
 import CalendarBodyWeekly from './CalendarBodyWeekly.js';
 
@@ -13,54 +14,30 @@ height: calc(100% - ${props => props.header ? props.header : "50px"});
 background-color: white;
 `;
 
-const Head = styled.div`
+const Vertical = styled.div`
 width: 100%;
-height: ${props => props.height ? props.height : "100px"};
-background-color: #66211d;
 display: flex;
-justify-content: space-between;
-align-items: flex-start;
-font-size: 70px;
-font-weight: 300;
-
-& span:nth-child(2) {
-	color: white;
-	margin-left: 30px;
-	margin-bottom: 10px;
-}
-
-& span:nth-child(1) {
-	color: white;
-	font-size: 15px;
-	margin-top: 20px;
-	margin-left: 20px;
-}
-
-& span:nth-child(3) {
-	color: white;
-	font-size: 20px;
-	margin-top: 50px;
-	margin-left: 30px;
-}
+flex-direction: column;
 `;
 
 const Wrapper = styled.div`
 display: flex;
 height: ${props => props.height};
+position: absolute;
+right: 0px;
 `;
 
 const SButton = styled.button`
 width: 200px;
-height: 100px;
+height: 50px;
 border: none;
 font-size: 1.5rem;
 font-weight: 300;
-color: #fff;
-background-color: #933102;
+background-color: #e5e5f5;
 outline: none;
 
 &:hover {
-	background-color: #b35132;
+	background-color: #d5d5e5;
 }
 `;
 
@@ -144,18 +121,13 @@ const Calendar = (props) => {
 
 	return (
 		<Container { ...ref } header={props.header}>
-			<Head height={CALENDAR_HEAD_HEIGHT}>
-				<Wrapper height={CALENDAR_HEAD_HEIGHT}>
-					<span>{year}</span>
-					<span>{month}</span>
-					{currentItem.context === "Weekly" ? <span>{week}주차</span> : null}
+			<CalendarHeader height={CALENDAR_HEAD_HEIGHT}>
+				<Wrapper>
+					{bodyContext.map((item, i) => (
+						<SButton key={i} onClick={() => changeItem(i)}>{item.context}</SButton>
+					))}
 				</Wrapper>
-				<Wrapper height={CALENDAR_HEAD_HEIGHT}>
-				{bodyContext.map((item, i) => (
-					<SButton key={i} onClick={() => changeItem(i)}>{item.context}</SButton>
-				))}
-				</Wrapper>
-			</Head>
+			</CalendarHeader>
 			{currentItem.body}
 		</Container>
 	);

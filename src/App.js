@@ -34,7 +34,7 @@ const tabs = [
 ]
 
 function App(props) {
-	const { currentItem, changeItem } = useTabs(2, tabs);
+	const { currentItem, changeItem } = useTabs(1, tabs);
 
   return (
 		<Container>

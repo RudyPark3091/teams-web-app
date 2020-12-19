@@ -6,8 +6,7 @@ import CalendarDay from './CalendarDay';
 
 const Container = styled.div`
 width: 100%;
-height: calc(100% - ${props => props.headHeight ? props.headHeight : "100px"});
-background-color: papayawhip;
+height: calc(100% - ${props => props.headHeight ? props.headHeight : "100px"} + 50px);
 display: grid;
 grid-template-rows: repeat(6, 1fr);
 grid-template-columns: repeat(7, 1fr);

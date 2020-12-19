@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useQuery, gql } from '@apollo/client';
 
 import Loading from './Loading2.js';
+import Error from './Error.js';
 import UserTasks from './UserTasks.js';
 
 const QUERY_ALL_USERS = gql`
@@ -69,7 +70,7 @@ const UserList = (props) => {
 	}, [loading]);
 
 	if (loading) return <Loading mono></Loading>;
-	if (error) return <p>Error :(</p>;
+	if (error) return <Error></Error>;
 
 	return (
 		<Container>

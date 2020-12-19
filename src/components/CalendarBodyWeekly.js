@@ -6,16 +6,15 @@ import useGesture from '../hooks/useGesture.js';
 
 const Container = styled.div`
 width: 100%;
-height: calc(100% - ${props => props.headHeight ? props.headHeight : "100px"});
+height: calc(100% - ${props => props.headHeight ? props.headHeight : "100px"} + 50px);
 display: flex;
 overflow-y: scroll;
 `;
 
 const WeekDay = styled.div`
 width: calc(100% / 7);
-background-color: ${props => (
-	props.sunday ? "#ffeeee" :
-		props.saturday ? "#eeeeff" : "#ffffff"
+color: ${props => (props.sunday ? "#ff0000" :
+	props.saturday ? "#0000ff" : "#959595"
 )};
 border-right: 1px solid #e5e5e5;
 padding: 10px;
