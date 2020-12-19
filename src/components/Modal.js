@@ -79,10 +79,10 @@ const Modal = React.forwardRef((props, ref) => {
 
 	useEffect(() => {
 		xButton.current.addEventListener("click", closeModal);
-		// ref.current.addEventListner("keydown", handleKeyDown);
+		document.body.addEventListener("keydown", handleKeyDown);
 		return () => {
 			xButton.current.removeEventListener("click", closeModal);
-			// ref.current.removeEventListner("keydown", handleKeyDown);
+			document.body.removeEventListener("keydown", handleKeyDown);
 		}
 	});
 
