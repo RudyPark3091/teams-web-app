@@ -71,14 +71,14 @@ const CalendarBodyMonthly = (props) => {
 			dayRef.current[i] || React.createRef()
 		));
 	}
-	console.log(dayRef);
 	
+	const [modalContext, setModalContext] = useState();
 	const showModal = (e) => {
 		modal.current.style.display = "block";
+		setModalContext(<div>hi</div>);
 	}
 
 	useEffect(() => {
-		console.log(dayRef);
 		if (dayRef.current) {
 			dayRef.current.map((ref) => {
 				ref.current.addEventListener("click", showModal);
@@ -98,7 +98,7 @@ const CalendarBodyMonthly = (props) => {
 	return (
 		<Container { ...ref } headHeight={props.headHeight}>
 			<Modal ref={modal} width="400px" height="400px">
-				modal content
+				{modalContext}
 			</Modal>
 			{arr.map((v, i) => {
 				if (i%7 === 6)

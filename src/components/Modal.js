@@ -71,10 +71,18 @@ const Modal = React.forwardRef((props, ref) => {
 		ref.current.style.display = "none";
 	}
 
+	const handleKeyDown = (e) => {
+		if (e.keyCode === 27) {
+			closeModal();
+		}
+	}
+
 	useEffect(() => {
 		xButton.current.addEventListener("click", closeModal);
+		// ref.current.addEventListner("keydown", handleKeyDown);
 		return () => {
 			xButton.current.removeEventListener("click", closeModal);
+			// ref.current.removeEventListner("keydown", handleKeyDown);
 		}
 	});
 
