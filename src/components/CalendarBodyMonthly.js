@@ -75,7 +75,7 @@ const CalendarBodyMonthly = (props) => {
 	const [modalContext, setModalContext] = useState();
 	const showModal = (e) => {
 		modal.current.style.display = "block";
-		setModalContext(<div>hi</div>);
+		setModalContext(e.target.innerText);
 	}
 
 	useEffect(() => {
@@ -91,7 +91,7 @@ const CalendarBodyMonthly = (props) => {
 				});
 			}
 		};
-	});
+	}, []);
 
 	const [numArr, setNumArr] = useState(arr);
 
