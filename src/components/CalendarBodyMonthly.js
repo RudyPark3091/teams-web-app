@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 import Modal from './Modal.js';
+import ModalForm from './ModalForm.js';
 import useGesture from '../hooks/useGesture.js';
 import CalendarDay from './CalendarDay';
 
@@ -75,7 +76,7 @@ const CalendarBodyMonthly = (props) => {
 	const [modalContext, setModalContext] = useState();
 	const showModal = (e) => {
 		modal.current.style.display = "block";
-		setModalContext(e.target.innerText);
+		setModalContext(<ModalForm></ModalForm>);
 	}
 
 	useEffect(() => {
