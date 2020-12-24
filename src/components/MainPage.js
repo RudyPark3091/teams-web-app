@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useQuery, gql } from '@apollo/client';
 
 import Loading from './Loading2.js';
-import Modal from './Modal.js';
+import Error from './Error.js';
 
 const QUERY_ALL_TODOS = gql`
 query {
@@ -62,44 +62,28 @@ align-items: center;
 const MainPage = (props) => {
 	const { loading, error, data } = useQuery(QUERY_ALL_TODOS);
 
-	const modal = useRef();
-	const showModal = (e) => {
-		modal.current.style.display = "block";
-	}
-
 	if (loading) return <Loading mono></Loading>;
-	if (error) return (
-		<>
-			<button onClick={showModal}>show modal</button>
-			<Modal ref={modal} width="500px" height="400px">
-				<div>this is modal body</div>
-			</Modal>
-		</>
-	);
+	if (error) return <Error></Error>
 
 	return (
-		<>
-			<Modal width="500px" height="400px">
-				<div>hi</div>
-			</Modal>
-			<Container>
-				<Title>Schedules</Title>
-				{data.todos.map((todo, i) => (
-					<Wrapper key={i}>
-						<div style={{fontSize:"20px"}}>{todo.content}</div>
-						<Vertical>
-							<span>{`${todo.startDate.year}-${todo.startDate.month}-${todo.startDate.date}`}</span>
-							<span>{`${todo.endDate.year}-${todo.endDate.month}-${todo.endDate.date}`}</span>
-						</Vertical>
-						<Vertical>{todo.assigned.map((user, i) => (
-							<div key={i} style={{color:user.color}}>{user.name}</div>
-						))}</Vertical>
-					</Wrapper>
-				))}
-			</Container>
-		</>
+		<Container>
+			<Title>Schedules</Title>
+			{data.todos.map((todo, i) => (
+				<Wrapper key={i}>
+					<div style={{fontSize:"20px"}}>{todo.content}</div>
+					<Vertical>
+						<span>{`${todo.startDate.year}-${todo.startDate.month}-${todo.startDate.date}`}</span>
+						<span>{`${todo.endDate.year}-${todo.endDate.month}-${todo.endDate.date}`}</span>
+					</Vertical>
+					<Vertical>{todo.assigned.map((user, i) => (
+						<div key={i} style={{color:user.color}}>{user.name}</div>
+					))}</Vertical>
+				</Wrapper>
+			))}
+		</Container>
 	);
 }
 
 export default MainPage;
+export { QUERY_ALL_TODOS };
 

@@ -1,10 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import { useQuery, gql } from '@apollo/client';
 
 import Modal from './Modal.js';
 import ModalForm from './ModalForm.js';
 import useGesture from '../hooks/useGesture.js';
 import CalendarDay from './CalendarDay';
+
+import Loading from './Loading2.js';
+import Error from './Error.js';
+
+import { QUERY_ALL_TODOS } from './MainPage.js';
 
 const Container = styled.div`
 width: 100%;
@@ -96,8 +102,15 @@ const CalendarBodyMonthly = (props) => {
 
 	const [numArr, setNumArr] = useState(arr);
 
+	const { loading, error, data } = useQuery(QUERY_ALL_TODOS);
+	console.log(data);
+	let queryStatus;
+	if (loading) queryStatus = <Loading></Loading>;
+	if (error) queryStatus = <Error></Error>;
+
 	return (
 		<Container { ...ref } headHeight={props.headHeight}>
+			{queryStatus}
 			<Modal ref={modal} width="400px" height="400px">
 				{modalContext}
 			</Modal>
