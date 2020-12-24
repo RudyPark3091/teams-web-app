@@ -21,6 +21,10 @@ padding: 10px;
 `;
 
 const CalendarDay = React.forwardRef((props, ref) => {
+	let starts, ends;
+	if (props.starts) starts = props.starts;
+	if (props.ends) ends = props.ends;
+
 	return (
 		<>
 			<Day
@@ -29,9 +33,24 @@ const CalendarDay = React.forwardRef((props, ref) => {
 				saturday={props.saturday}
 			>
 				<span>{props.text}</span>
-				<TodoItemMonthly>
-					<span>hi</span>
-				</TodoItemMonthly>
+				{starts ? starts.map((todo, i) => {
+					if (props.text === todo.startDate.date) {
+						return (
+							<TodoItemMonthly key={i} color="#ff9999">
+								<span>starts: {todo.content}</span>
+							</TodoItemMonthly>
+						)
+					}
+				}) : null}
+				{ends ? ends.map((todo, i) => {
+					if (props.text === todo.endDate.date) {
+						return (
+							<TodoItemMonthly key={i} color="#99ff99">
+								<span>ends: {todo.content}</span>
+							</TodoItemMonthly>
+						)
+					}
+				}) : null}
 			</Day>
 		</>
 	)

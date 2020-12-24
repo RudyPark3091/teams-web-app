@@ -94,7 +94,7 @@ const CalendarBodyMonthly = (props) => {
 		return () => {
 			if (dayRef.current) {
 				dayRef.current.map((ref) => {
-					ref.current.addEventListener("click", showModal);
+					ref.current.removeEventListener("click", showModal);
 				});
 			}
 		};
@@ -103,10 +103,20 @@ const CalendarBodyMonthly = (props) => {
 	const [numArr, setNumArr] = useState(arr);
 
 	const { loading, error, data } = useQuery(QUERY_ALL_TODOS);
-	console.log(data);
 	let queryStatus;
 	if (loading) queryStatus = <Loading></Loading>;
 	if (error) queryStatus = <Error></Error>;
+
+	let starts, ends;
+	if (data) {
+		starts = data.todos.filter(todo => {
+			if (todo.startDate.month === date.getMonth() + 1) return true;
+		})
+		ends = data.todos.filter(todo => {
+			if (todo.endDate.month === date.getMonth() + 1) return true;
+		})
+	}
+	const todoOfMonth = { starts, ends };
 
 	return (
 		<Container { ...ref } headHeight={props.headHeight}>
@@ -116,11 +126,37 @@ const CalendarBodyMonthly = (props) => {
 			</Modal>
 			{arr.map((v, i) => {
 				if (i%7 === 6)
-					return <CalendarDay ref={dayRef.current[i]} key={i} saturday text={v}></CalendarDay>
+					return (
+						<CalendarDay
+							ref={dayRef.current[i]}
+							key={i}
+							saturday
+							text={v}
+							{ ...todoOfMonth }
+						>
+						</CalendarDay>
+					)
 				else if (i%7 === 0)
-					return <CalendarDay ref={dayRef.current[i]} key={i} sunday text={v}></CalendarDay>
+					return (
+						<CalendarDay
+							ref={dayRef.current[i]}
+							key={i}
+							sunday
+							text={v}
+							{ ...todoOfMonth }
+						>
+						</CalendarDay>
+					)
 				else
-					return <CalendarDay ref={dayRef.current[i]} key={i} text={v}></CalendarDay>
+					return (
+						<CalendarDay
+							ref={dayRef.current[i]}
+							key={i}
+							text={v}
+							{ ...todoOfMonth }
+						>
+						</CalendarDay>
+					)
 			})}
 		</Container>
 	);
